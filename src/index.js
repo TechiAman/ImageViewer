@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Login from './screens/login/Login'
+import Navigationbar from './common/navigation-bar/Navigationbar';
+import Routing from './routing';
+
+const App = () => {
+	return <div className="App">
+		<Navigationbar />
+		<Routing />
+	</div>
+}
 
 ReactDOM.render(
-    <Login />,
+    <App />,
     document.getElementById('root')
 );

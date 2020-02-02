@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Navigationbar from '../../common/navigation-bar/Navigationbar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import { withRouter } from "react-router-dom";
 // import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -29,6 +29,9 @@ class Login extends Component {
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	}
 
+	componentDidMount() {
+	}
+
 	handleInputChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value,
@@ -51,7 +54,7 @@ class Login extends Component {
 		}
 		if (this.state.password && this.state.username) {
 			if (this.state.username === userCredentials.username && this.state.password === userCredentials.password) {
-
+				this.props.history.push("/home");
 			} else {
 				this.setState({
 					errorMessage: "Incorrect username and/or password"
@@ -63,8 +66,7 @@ class Login extends Component {
 	render() {
 		return (
 			<>
-				<Navigationbar />
-				<Card className={"card-main"} variant="outlined">
+				<Card className={"card-main"} variant="outlined" className="card-main-login">
 				<CardContent>
 					<Typography color="textPrimary" gutterBottom variant="h3">
 						LOGIN
@@ -72,12 +74,12 @@ class Login extends Component {
 					<form ref="form" className="form">
 						<FormControl>
 							<InputLabel htmlFor="username">Username<sup>*</sup></InputLabel>
-							<Input id="username" type="text" name="username" onChange={this.handleInputChange}/>
+							<Input id="username" type="text" name="username" className="input-container-login" onChange={this.handleInputChange}/>
 							{this.state.showRequiredUserName && <FormHelperText id="error">required</FormHelperText>}
 						</FormControl>
 						<FormControl>
 							<InputLabel htmlFor="password">Password<sup>*</sup></InputLabel>
-							<Input id="password" type="password" name="password" onChange={this.handleInputChange}/>
+							<Input id="password" type="password" name="password" className="input-container-login" onChange={this.handleInputChange}/>
 							{this.state.showRequiredPassword && <FormHelperText id="error">required</FormHelperText>}
 						</FormControl>
 						{this.state.errorMessage && <p id="error">{this.state.errorMessage}</p>}
@@ -90,4 +92,4 @@ class Login extends Component {
 	}
 }
 
-export default Login
+export default withRouter(Login);
