@@ -1,0 +1,43 @@
+.navigation-bar {
+	background-color: #263238;
+	height: 60px;
+}
+
+h1 {
+	font-size: 18px;
+	color: #fff;
+	line-height: 60px;
+	margin-left: 20px;
+}
+
+.card-main {
+	width: 40%;
+	margin: 100px auto;
+}
+
+form {
+	display: flex;
+    flex-direction: column;
+}
+
+.MuiInputBase-root {
+	width: 70%;
+}
+
+.MuiCardContent-root {
+	padding: 50px !important;
+}
+
+.MuiFormControl-root {
+	margin: 10px 0 !important;
+}
+
+.login-btn {
+	width: 15%;
+	margin-top: 30px !important;
+}
+
+
+#error {
+	color: red;
+}

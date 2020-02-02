@@ -1,0 +1,11 @@
+.navigation-bar {
+	background-color: #263238;
+	height: 60px;
+}
+
+h1 {
+	font-size: 18px;
+	color: #fff;
+	line-height: 60px;
+	margin-left: 20px;
+}
