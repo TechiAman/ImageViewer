@@ -19,7 +19,9 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+		flex: "0 40%",
+    boxSizing:"border-box",
+		margin: "20px auto"
   },
   media: {
     height: 0,
@@ -80,7 +82,7 @@ export default function ImagePost(props) {
         <Typography variant="body2" color="textSecondary" component="p">
           {captionText}
         </Typography>
-				<Typography variant="body2"  component="p" className={classes.tags}>
+		<Typography variant="body2"  component="p" className={classes.tags}>
           {tags}
         </Typography>
       </CardContent>
@@ -101,7 +103,7 @@ export default function ImagePost(props) {
         </Typography>
       </CardActions>
 			{comments && <Typography variant="body2" color="textSecondary" className="comment" component="p">
-				<strong>{props.userData.user.username}:</strong>{comments}
+				<strong>{props.userData.user.username}: </strong>{comments}
 			</Typography>}
 			<div className="add-comment-container">
 				<FormControl className="addComment-form">

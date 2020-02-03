@@ -38,10 +38,13 @@ const Navigationbar = (props) => {
 				</div>}
 			</div>
 			{showMenuList && isLoggedIn && <ul className="menu-list">
-				<li>My Account</li> 
+				<li onClick={() => {
+					window.location = "/profile";
+				}}>My Account</li> 
 				<hr />
 				<li onClick={() => {
 					sessionStorage.removeItem("selfData");
+					sessionStorage.removeItem("selfMediaData");
 					window.location = "/";
 				}}>Log Out</li>
 			</ul>}

@@ -1,15 +1,15 @@
 .addComment-form {
     margin-left: 20px !important;
-    width: 60%;
+    width: 80%;
 }
 
 .add-comment-button {
     margin-left: 20px !important;
-   
 }
 
 .add-comment-container {
     display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
