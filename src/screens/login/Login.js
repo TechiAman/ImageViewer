@@ -66,7 +66,7 @@ class Login extends Component {
 	render() {
 		return (
 			<>
-				<Card className={"card-main"} variant="outlined" className="card-main-login">
+				<Card variant="outlined" className="card-main-login">
 				<CardContent>
 					<Typography color="textPrimary" gutterBottom variant="h3">
 						LOGIN

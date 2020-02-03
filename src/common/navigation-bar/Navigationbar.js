@@ -11,23 +11,30 @@ import Avatar from '@material-ui/core/Avatar';
 const Navigationbar = (props) => {
 		const [imageSrc, setImageSrc] = useState("");
 		const [isLoggedIn, setIsLoggedIn] = useState(false);
+		const [showSearchBar, setShowSearchBar] = useState(false);
 		const [showMenuList, setShowMenuList] =  useState(false);
-		const [searchValue, setSearchValue] =  useState("");
+		const [searchValue, setSearchValue] =  useState(JSON.parse(window.sessionStorage.getItem("searchData")) === null ? "" : JSON.parse(window.sessionStorage.getItem("searchData")) || "");
 
 		useEffect(() => {
 			const sessionStorageData = JSON.parse(sessionStorage.getItem("selfData"));
 			if (sessionStorageData !== null && sessionStorageData.data) {
 				setImageSrc(sessionStorageData.data.profile_picture);
 				setIsLoggedIn(true);
+				setShowSearchBar(true);
+			}
+			if (window.location.pathname === "/profile") {
+				setShowSearchBar(false)
 			}
 		}, [window.sessionStorage]);
 
 		const handleSearchChange = (e) => {
 				setSearchValue(e.target.value)
 				const sessionStorageData = JSON.parse(sessionStorage.getItem("selfMediaData"));
-				const newData = sessionStorageData.data.filter(data => data.caption.text.toLowerCase().match(searchValue.toLowerCase()))
-				console.log(newData)
-				// window.sessionStorage.setItem("selfMediaData", JSON.stringify(newData))
+				const newData = sessionStorageData.filter(data => data.caption.text.toLowerCase().match(searchValue.toLowerCase())).length === 0 
+				? sessionStorageData : sessionStorageData.filter(data => data.caption.text.toLowerCase().match(searchValue.toLowerCase()));
+				window.sessionStorage.setItem("selfMediaDataMan", JSON.stringify(newData))
+				window.sessionStorage.setItem("searchData", JSON.stringify(e.target.value))
+				window.location.reload();
 		}
 
 		return (
@@ -35,7 +42,7 @@ const Navigationbar = (props) => {
 			<div className="navigation-bar">
 				<h1 onClick={() => window.location = "/home"}>Image Viewer</h1>
 				{isLoggedIn && <div className="search-container">
-				<FormControl  variant="outlined" className="input-container-search">
+				{showSearchBar && <FormControl  variant="outlined" className="input-container-search">
 					<OutlinedInput
 						className="input-search"
 						id="outlined-adornment-amount"
@@ -44,7 +51,7 @@ const Navigationbar = (props) => {
 						value={searchValue}
 						startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
 					/>
-        </FormControl>
+        </FormControl>}
 				<IconButton aria-label="user-profile-picture" onClick={() => setShowMenuList(!showMenuList)}><Avatar alt="Remy Sharp" className="avatar" src={imageSrc} /></IconButton>
 				</div>}
 			</div>
@@ -56,6 +63,8 @@ const Navigationbar = (props) => {
 				<li onClick={() => {
 					sessionStorage.removeItem("selfData");
 					sessionStorage.removeItem("selfMediaData");
+					sessionStorage.removeItem("selfMediaDataMan");
+					sessionStorage.removeItem("searchData");
 					window.location = "/";
 				}}>Log Out</li>
 			</ul>}

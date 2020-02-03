@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -55,12 +55,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function ImagePost(props) {
   const classes = useStyles();
-	const [userImage, setUserImage] = useState(props.userData ? props.userData.user.profile_picture : "")
-	const [dateOfPost, setDateOfPost] = useState(props.userData ? moment(new Date(Number(`${props.userData.caption.created_time}000`))).format('YYYY-MM-DD HH:mm:ss') : "")
-	const [imageUrl, setImageUrl] = useState(props.userData ? props.userData.images.standard_resolution.url : "")
-	const [captionText, setCaptionText] = useState(props.userData ? props.userData.caption.text : "")
+	const [userImage] = useState(props.userData ? props.userData.user.profile_picture : "")
+	const [dateOfPost] = useState(props.userData ? moment(new Date(Number(`${props.userData.caption.created_time}000`))).format('YYYY-MM-DD HH:mm:ss') : "")
+	const [imageUrl] = useState(props.userData ? props.userData.images.standard_resolution.url : "")
+	const [captionText] = useState(props.userData ? props.userData.caption.text : "")
 	const [likes, setLikes] = useState(props.userData ? props.userData.likes.count : "")
-	const [tags, setTags] = useState(props.userData ? `#${props.userData.tags.join('#')}` : "")
+	const [tags] = useState(props.userData ? `#${props.userData.tags.join('#')}` : "")
 	const [comments, setComments] = useState("")
 	const [comment, setComment] = useState("")
 
@@ -108,8 +108,8 @@ export default function ImagePost(props) {
 			</Typography>}
 			<div className="add-comment-container">
 				<FormControl className="addComment-form">
-					<InputLabel htmlFor="addComment">Add Comment<sup>*</sup></InputLabel>
-					<Input id="addComment" type="text" value={comment} name="addComment" onChange={(e) => setComment(e.target.value)} className="add-comment-input" />
+					<InputLabel htmlFor={`addComment-${dateOfPost}`}>Add Comment<sup>*</sup></InputLabel>
+					<Input id={`addComment-${dateOfPost}`} type="text" value={comment} name={`addComment-${dateOfPost}`} onChange={(e) => setComment(e.target.value)} className="add-comment-input" />
 				</FormControl>
 				<Button type="submit" className="add-comment-button"  variant="contained" onClick={() => { 
 					setComments(comment)

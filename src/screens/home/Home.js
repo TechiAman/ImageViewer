@@ -30,12 +30,13 @@ class Home extends Component {
 	}
 
 	getSelefMediaData() {
-		const sessionStorageData = JSON.parse(sessionStorage.getItem("selfMediaData"));
+		const sessionStorageData = JSON.parse(sessionStorage.getItem("selfMediaDataMan"));
 		if (sessionStorageData === null) {
 		fetch("https://api.instagram.com/v1/users/self/media/recent/?access_token=8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784")
 			.then((res) => res.json())
 			.then(res => {
-				sessionStorage.setItem("selfMediaData", JSON.stringify(res))
+				sessionStorage.setItem("selfMediaData", JSON.stringify(res.data))
+				sessionStorage.setItem("selfMediaDataMan", JSON.stringify(res.data))
 				window.location.reload();
 			})
 		} else {
@@ -49,7 +50,7 @@ class Home extends Component {
 		console.log(this.state.profileData)
 		return (
 				<div className="images-container">
-					{this.state.profileData && this.state.profileData.data.map((insta, index) => {
+					{this.state.profileData && this.state.profileData.map((insta, index) => {
 						return  <ImagePost userData={insta} key={index} shouldShowImage={true}/>
 					})}
 				</div>

@@ -27,7 +27,7 @@ class Profile extends Component {
 			if (sessionStorageData !== null && sessionStorageData.data) {
 				this.setState({
 					selfData: sessionStorageData.data,
-					selfMediaData: sessionStorageMediaData.data
+					selfMediaData: sessionStorageMediaData
 				})
 			}
 	}

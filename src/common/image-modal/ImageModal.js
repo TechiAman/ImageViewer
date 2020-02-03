@@ -3,12 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import ImagePost from '../image-post/ImagePost'
 
 const useStyles = makeStyles(theme => ({
@@ -52,8 +46,6 @@ const useStyles = makeStyles(theme => ({
 export default function ImageModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(props.open || false);
-  const [errorMessage, setErrorMessage] = React.useState(false);
-  const [fullName, setFullName] = React.useState("");
   const handleClose = () => {
     setOpen(false);
     props.setShowImageModal(false);
