@@ -50,7 +50,7 @@ class Home extends Component {
 		return (
 				<div className="images-container">
 					{this.state.profileData && this.state.profileData.data.map((insta, index) => {
-						return  <ImagePost userData={insta} key={index}/>
+						return  <ImagePost userData={insta} key={index} shouldShowImage={true}/>
 					})}
 				</div>
 		)

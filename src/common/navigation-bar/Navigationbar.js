@@ -12,6 +12,7 @@ const Navigationbar = (props) => {
 		const [imageSrc, setImageSrc] = useState("");
 		const [isLoggedIn, setIsLoggedIn] = useState(false);
 		const [showMenuList, setShowMenuList] =  useState(false);
+		const [searchValue, setSearchValue] =  useState("");
 
 		useEffect(() => {
 			const sessionStorageData = JSON.parse(sessionStorage.getItem("selfData"));
@@ -21,18 +22,28 @@ const Navigationbar = (props) => {
 			}
 		}, [window.sessionStorage]);
 
+		const handleSearchChange = (e) => {
+				setSearchValue(e.target.value)
+				const sessionStorageData = JSON.parse(sessionStorage.getItem("selfMediaData"));
+				const newData = sessionStorageData.data.filter(data => data.caption.text.toLowerCase().match(searchValue.toLowerCase()))
+				console.log(newData)
+				// window.sessionStorage.setItem("selfMediaData", JSON.stringify(newData))
+		}
+
 		return (
 			<>
 			<div className="navigation-bar">
-				<h1>Image Viewer</h1>
+				<h1 onClick={() => window.location = "/home"}>Image Viewer</h1>
 				{isLoggedIn && <div className="search-container">
 				<FormControl  variant="outlined" className="input-container-search">
-          <OutlinedInput
+					<OutlinedInput
 						className="input-search"
-            id="outlined-adornment-amount"
+						id="outlined-adornment-amount"
 						placeholder="Search..."
-            startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
-          />
+						onChange={(e) => handleSearchChange(e)}
+						value={searchValue}
+						startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
+					/>
         </FormControl>
 				<IconButton aria-label="user-profile-picture" onClick={() => setShowMenuList(!showMenuList)}><Avatar alt="Remy Sharp" className="avatar" src={imageSrc} /></IconButton>
 				</div>}

@@ -20,6 +20,9 @@ form {
 
 .card-main-login {
 	padding: 50px !important;
+	width: 400px;
+	margin: 20px auto;
+	
 }
 
 .MuiFormControl-root {

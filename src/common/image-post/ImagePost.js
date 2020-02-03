@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
   card: {
 		flex: "0 40%",
     boxSizing:"border-box",
-		margin: "20px auto"
+		padding: "20px",
+		marginTop: "30px"
   },
   media: {
     height: 0,
@@ -72,17 +73,17 @@ export default function ImagePost(props) {
         title={props.userData ? props.userData.user.username : ""}
         subheader={dateOfPost}
       />
-      <CardMedia
+      {props.shouldShowImage && <CardMedia
         className={classes.media}
         image={imageUrl}
         title="Paella dish"
-      />
+      />}
 			<hr className={classes.hr}/>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {captionText}
         </Typography>
-		<Typography variant="body2"  component="p" className={classes.tags}>
+			<Typography variant="body2"  component="p" className={classes.tags}>
           {tags}
         </Typography>
       </CardContent>
